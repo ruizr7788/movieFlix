@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Flix</title>
+  </head>
+  <body>
+    <section id="main__container">
+      <section id="application__header--container">
+        <div id="brand__container">
+          <div class="logo">
+            <img src="/images/logo.png" alt="" />
+          </div>
+          <div class="title"><h1>Flix</h1></div>
+        </div>
+        <form id="searchbar__container">
+          <input id="query" type="text" placeholder="Search for movie" />
+        </form>
+        <div id="categories__container">
+          <div id="genre__container">
+            <select name="genreSelection" id="genreSelection">
+              <option value="default">Genre</option>
+              <option value="all">All</option>
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="documentary">Documentary</option>
+              <option value="drama">Drama</option>
+              <option value="comedy">Comedy</option>
+              <option value="horror">Horror</option>
+              <option value="mystery">Mystery</option>
+              <option value="romance">Romance</option>
+              <option value="sci-fi">Sci-Fi</option>
+              <option value="sport">Sport</option>
+              <option value="thiller">Thriller</option>
+            </select>
+          </div>
+          <div id="year__container">
+            <select name="yearSelection" id="yearSelection">
+              <option value="defualt">Year</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
+            </select>
+          </div>
+        </div>
+        <div id="watchlist__container">
+          <div class="watchlist">
+            <button type="button" class="watchlist--btn">Watchlist</button>
+          </div>
+        </div>
+      </section>
+      <section id="application__movies--container">
+        <!---- add this card for non desktop and non laptops ---->
+
+        <div class="movie--card">
+          <img src="/images/movieBatman.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/movieDeepWater.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/movieDune.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/movieFresh.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/movieHarryPotter.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/movieIceAge.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/moviePanda.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+        <div class="movie--card">
+          <img src="/images/movieTransformers.jpg" alt="" />
+          <div class="add--to-watchlist-btn">
+            <button type="button" class="watchlist--btn">+</button>
+          </div>
+        </div>
+
+        <!---- add this card for laptops and desktops ---->
+        <!-- <div class="movie--card">
+          <img src="" alt="" />
+          <div class="card--footer">
+            <div class="card--footer-title">
+              <h4>Undefined</h4>
+            </div>
+            <div class="card--footer-btn">
+              <button type="button" class="watchlist--btn">+</button>
+            </div>
+          </div>
+        </div> -->
+      </section>
+      <div id="pagination"></div>
+      <!-- build set display to none until certain viewport width -->
+    </section>
+    <section id="application__sidebar--container">
+      <h6>Top 10 Movies</h6>
+      <ul class="top--movies">
+        <li class="top-1">
+          <img src="/images/movieScream.jpeg" alt="" />
+          <span>Scream</span>
+        </li>
+        <li class="top-2">
+          <img src="/images/movieJackass.jpg" alt="" />
+          <span>Jackass Forever</span>
+        </li>
+        <li class="top-3">
+          <img src="/images/movieKimi.jpg" alt="" />
+          <span>Kimi</span>
+        </li>
+        <li class="top-4">
+          <img src="/images/movieWantBack.jpg" alt="" />
+          <span>I Want You Back</span>
+        </li>
+        <li class="top-5">
+          <img src="/images/movieBatman.jpg" alt="" />
+          <span>The Batman</span>
+        </li>
+        <li class="top-6">
+          <img src="/images/movieFresh.jpg" alt="" />
+          <span>Fresh</span>
+        </li>
+        <li class="top-7">
+          <img src="/images/movieDeepWater.jpg" alt="" />
+          <span>Deep Water</span>
+        </li>
+        <li class="top-8">
+          <img src="/images/movieWindfall.jpg" alt="" />
+          <span>Windfall</span>
+        </li>
+        <li class="top-9">
+          <img src="/images/movieX.jpeg" alt="" />
+          <span>X</span>
+        </li>
+        <li class="top-10">
+          <img src="/images/movieLostCity.jpg" alt="" />
+          <span>The Lost City</span>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
