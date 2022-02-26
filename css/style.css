@@ -52,7 +52,7 @@
 }
 
 body {
-  background: linear-gradient(140deg, rgba(0, 0, 255, 0.068), white);
+  position: relative;
 }
 
 #main__container {
@@ -339,7 +339,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10em;
+  margin-top: 0;
   margin-left: 0;
 }
 #application__sidebar--container h6 {
@@ -348,7 +348,6 @@ body {
 }
 #application__sidebar--container ul li {
   display: flex;
-
   align-items: center;
   list-style: none;
   width: var(--desktop--sidebar-card-width);
@@ -366,6 +365,23 @@ body {
 }
 #application__sidebar--container ul li:nth-child(even) {
   background-color: var(--main--grey-background);
+}
+
+/* ---------- FOOTER --------- */
+#footer__container {
+  margin-top: 2em;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  background-color: var(--main--grey-background);
+}
+
+#footer {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  color: #999;
 }
 
 /* ----------media queries ---------- */
@@ -404,13 +420,15 @@ body {
     grid-template-columns: repeat(4, 1fr);
   }
   #application__sidebar--container {
-    margin: 7em auto;
+    margin: 3em auto;
     width: fit-content;
   }
   /* ---------- TOP MOVIES BAR ---------- */
   #application__sidebar--container ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 0.5em;
+    row-gap: 0.5em;
   }
 
   /* ---------- WATHCLIST BUTTON ---------- */
@@ -535,5 +553,11 @@ body {
   /* ---------- PAGINATION --------- */
   #pagination__container {
     grid-column: 1/5;
+  }
+
+  /* ----------- FOOTER ---------- */
+  #footer__container {
+    position: absolute;
+    bottom: 0;
   }
 }
