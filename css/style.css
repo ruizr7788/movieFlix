@@ -175,7 +175,7 @@ body {
 
 /* ---------- MOVIE CONTAINER SECTION ---------- */
 
-#application__movies--container {
+#movies__container {
   max-width: fit-content;
   padding: 2em 0;
   display: grid;
@@ -183,24 +183,21 @@ body {
   column-gap: 0.5em;
   grid-template-columns: repeat(2, 1fr);
 }
-#application__movies--container .movie--card {
+#movies__container .movie--card {
   position: relative;
 }
-#application__movies--container .movie--card img {
+#movies__container .movie--card img {
   border: 1px solid black;
   width: var(--mobile--movie-card-width);
   height: var(--mobile--movie-card-height);
 }
 
-#application__movies--container .movie--card .add--to-watchlist-btn {
+#movies__container .movie--card .add--to-watchlist-btn {
   position: absolute;
   top: -0.5em;
   left: -0.5em;
 }
-#application__movies--container
-  .movie--card
-  .add--to-watchlist-btn
-  .watchlist--btn:hover {
+#movies__container .movie--card .add--to-watchlist-btn .watchlist--btn:hover {
   cursor: pointer;
   border: 1px solid lightgreen;
 }
@@ -217,7 +214,7 @@ body {
 
 /* ---------- DESKTOP MOVIE CARD STYLING ------------- */
 
-#application__movies--container .movie--card .card--footer {
+#movies__container .movie--card .card--footer {
   transform: translateY(-3.3em);
   display: flex;
   color: white;
@@ -227,13 +224,13 @@ body {
   background-color: var(--main--red);
 }
 
-#application__movies--container .movie--card .card--footer .card--footer-title {
+#movies__container .movie--card .card--footer .card--footer-title {
   margin-left: 1em;
 }
-#application__movies--container .movie--card .card--footer .card--footer-btn {
+#movies__container .movie--card .card--footer .card--footer-btn {
   margin-right: 1em;
 }
-#application__movies--container
+#movies__container
   .movie--card
   .card--footer
   .card--footer-btn
@@ -247,7 +244,7 @@ body {
   justify-content: center;
 }
 
-#application__movies--container
+#movies__container
   .movie--card
   .card--footer
   .card--footer-btn
@@ -256,7 +253,7 @@ body {
 }
 
 /* ---------- MOVIE CARD PLACEHOLDER ---------- */
-#application__movies--container .movie--card-placeholder img {
+#movies__container .movie--card-placeholder img {
   width: var(--mobile--movie-card-width);
   height: var(--mobile--movie-card-height);
 }
@@ -351,7 +348,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 0;
+  margin-top: 2em;
   margin-left: 0;
 }
 #application__sidebar--container h6 {
@@ -426,7 +423,7 @@ body {
   #watchlist__container {
     grid-row: 1/2;
   }
-  #application__movies--container {
+  #movies__container {
     row-gap: 1em;
     column-gap: 1em;
     grid-template-columns: repeat(4, 1fr);
@@ -476,7 +473,7 @@ body {
   #main__container {
     max-width: fit-content;
     width: 100%;
-    margin-right: 10em;
+    margin-right: 5em;
     font-size: var(--desktop--font--size);
   }
   /* ---------- LOGO ---------- */
@@ -496,6 +493,7 @@ body {
 
   #searchbar__container {
     width: 300px;
+    display: flex;
   }
   #searchbar__container input {
     border-radius: 1em;
@@ -537,12 +535,12 @@ body {
   }
   /* ---------- MOVIE CONTAINER SECTION ---------- */
 
-  #application__movies--container {
+  #movies__container {
     padding: 4em 0;
     row-gap: 1em;
     column-gap: 1em;
   }
-  #application__movies--container .movie--card img {
+  #movies__container .movie--card img {
     border: 1px solid black;
     width: var(--desktop--movie-card-width);
     height: var(--desktop--movie-card-height);
@@ -563,7 +561,7 @@ body {
   }
 
   /* ---------- MOVIE CARD PLACEHOLDER ---------- */
-  #application__movies--container .movie--card-placeholder img {
+  #movies__container .movie--card-placeholder img {
     width: var(--desktop--movie-card-width);
     height: var(--desktop--movie-card-height);
   }
@@ -571,6 +569,7 @@ body {
   /* ---------- PAGINATION --------- */
   #pagination__container {
     grid-column: 1/5;
+    margin-bottom: 5em;
   }
 
   /* ----------- FOOTER ---------- */
