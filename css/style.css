@@ -52,6 +52,7 @@
 }
 
 body {
+  min-height: 100vh;
   position: relative;
 }
 
@@ -254,6 +255,12 @@ body {
   border: 2px solid lightgreen;
 }
 
+/* ---------- MOVIE CARD PLACEHOLDER ---------- */
+#application__movies--container .movie--card-placeholder img {
+  width: var(--mobile--movie-card-width);
+  height: var(--mobile--movie-card-height);
+}
+
 /* -----------  PAGINATION ----------- */
 
 #pagination__container {
@@ -321,8 +328,13 @@ body {
   padding: 8px 30px;
   margin: 5px;
   font-size: 14px;
+  transition: all 0.5s ease-in-out;
 }
 
+#pagination__container .btn:hover {
+  background-color: #db4a40;
+  transition: all 0.5s ease-in-out;
+}
 #pagination__container .btn:active {
   transform: scale(0.98);
 }
@@ -483,7 +495,7 @@ body {
   /* ---------- SEARCHBAR ---------- */
 
   #searchbar__container {
-    margin-right: 0;
+    width: 300px;
   }
   #searchbar__container input {
     border-radius: 1em;
@@ -548,6 +560,12 @@ body {
   /* ---------- TOP MOVIES BAR ---------- */
   #application__sidebar--container ul {
     display: block;
+  }
+
+  /* ---------- MOVIE CARD PLACEHOLDER ---------- */
+  #application__movies--container .movie--card-placeholder img {
+    width: var(--desktop--movie-card-width);
+    height: var(--desktop--movie-card-height);
   }
 
   /* ---------- PAGINATION --------- */
