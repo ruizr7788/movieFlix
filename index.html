@@ -12,9 +12,8 @@
       <section id="application__header--container">
         <div id="brand__container">
           <div class="logo">
-            <img src="/images/logo.png" alt="" />
+            <img src="/images/flix-logos/Flix-logos_transparent.png" />
           </div>
-          <div class="title"><h1>Flix</h1></div>
         </div>
         <form id="searchbar__container">
           <input id="query" type="text" placeholder="Search for movie" />
@@ -50,6 +49,11 @@
               <option value="2015">2015</option>
               <option value="2014">2014</option>
             </select>
+          </div>
+        </div>
+        <div id="search__btn--container">
+          <div class="search--btn">
+            <button class="submit--btn">Search</button>
           </div>
         </div>
         <div id="watchlist__container">
@@ -122,9 +126,18 @@
             </div>
           </div>
         </div> -->
+        <div id="pagination__container">
+          <div id="pagination">
+            <div class="progress" id="progress" style="width: 0%"></div>
+            <div class="circle active">1</div>
+            <div class="circle">2</div>
+            <div class="circle">3</div>
+            <div class="circle">4</div>
+          </div>
+          <button class="btn" id="prev" disabled="">Prev</button>
+          <button class="btn" id="next">Next</button>
+        </div>
       </section>
-      <div id="pagination"></div>
-      <!-- build set display to none until certain viewport width -->
     </section>
     <section id="application__sidebar--container">
       <h6>Top 10 Movies</h6>

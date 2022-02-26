@@ -11,21 +11,21 @@
   --main--black-text: #333;
   --main--grey-background: #f5f5f5;
   --mobile--font--size: 14px;
-  --mobile--logo-width: 40px;
-  --mobile--logo--font-size: 30px;
+  --mobile--logo-width: 150px;
   --mobile--searchinput--width: 308px;
   --mobile--searchinput--height: 40px;
   --mobile--category--width: 142px;
   --mobile--category--height: 30px;
-  --mobile--watchlist--width: 85px;
-  --mobile--watchlist--height: 30px;
+  --mobile--watchlist--width: 100px;
+  --mobile--watchlist--height: 40px;
   --mobile--watchlist--button--width: 25px;
   --mobile--movie-card-width: 150px;
   --mobile--movie-card-height: 210px;
+  --mobile--pagination--width: 100px;
+  --mobile--pagination--height: 30px;
   --desktop--font--size: 15px;
-  --desktop--logo-img-width: 60px;
-  --desktop--logo-img-height: 60px;
-  --desktop--logo--font-size: 50px;
+  --desktop--logo-img-width: 150px;
+  --desktop--logo-img-height: 150px;
   --desktop--searchinput-width: 270px;
   --desktop--searchinput-height: 30px;
   --desktop--category--width: 150px;
@@ -41,11 +41,18 @@
   --desktop--sidebar-movie-height: 58px;
   --desktop--sidebar-card-height: 58px;
   --desktop--sidebar-card-width: 200px;
+
+  --pagination--line--border--empty: #e0e0e0;
+  --pagination--line--border--fill: #f44336;
 }
 
 @font-face {
   font-family: ubuntu;
   src: url(/fonts/ubuntu/ubuntu-regular-webfont.woff);
+}
+
+body {
+  background: linear-gradient(140deg, rgba(0, 0, 255, 0.068), white);
 }
 
 #main__container {
@@ -57,6 +64,7 @@
 #application__header--container {
   display: grid;
   width: 100%;
+  max-width: fit-content;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 0.7em;
   padding-top: 1em;
@@ -73,15 +81,8 @@
 }
 
 #brand__container .logo img {
+  /* width: 100px; */
   width: var(--mobile--logo-width);
-  padding: 0;
-}
-
-/* ---------- TITLE ---------- */
-
-#brand__container .title h1 {
-  font-size: var(--mobile--logo--font-size);
-  font-weight: 100;
   padding: 0;
 }
 
@@ -107,14 +108,44 @@
   margin: initial;
 }
 #genre__container select {
+  padding-left: 1em;
   width: var(--mobile--category--width);
   height: var(--mobile--category--height);
 }
 
 /* ---------- YEAR ---------- */
 #year__container select {
+  padding-left: 1em;
   width: var(--mobile--category--width);
   height: var(--mobile--category--height);
+}
+
+/* ---------- search button ---------- */
+
+#search__btn--container {
+  width: fit-content;
+  grid-column: 1/3;
+}
+
+#search__btn--container .search--btn {
+  width: fit-content;
+  margin-right: 0;
+}
+#search__btn--container .submit--btn {
+  font-weight: bold;
+  background-color: var(--main--red);
+  border: none;
+  color: var(--main--white-text);
+  width: 140px;
+  height: 40px;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+#search__btn--container .submit--btn:hover {
+  background-color: #db4a40;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
 
 /* ---------- WATHCLIST BUTTON ---------- */
@@ -125,22 +156,26 @@
   margin: auto;
 }
 #watchlist__container .watchlist .watchlist--btn {
+  font-weight: bold;
   background-color: var(--main--red);
   border-radius: 5px;
-  font-weight: 100;
   color: var(--main--white-text);
   border: none;
   outline: none;
   width: var(--mobile--watchlist--width);
   height: var(--mobile--watchlist--height);
+  transition: all 0.5s ease-in-out;
 }
 #watchlist__container .watchlist .watchlist--btn:hover {
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  background-color: #db4a40;
 }
 
 /* ---------- MOVIE CONTAINER SECTION ---------- */
 
 #application__movies--container {
+  max-width: fit-content;
   padding: 2em 0;
   display: grid;
   row-gap: 1em;
@@ -219,12 +254,92 @@
   border: 2px solid lightgreen;
 }
 
+/* -----------  PAGINATION ----------- */
+
+#pagination__container {
+  text-align: center;
+  grid-column: 1/3;
+  width: 100%;
+}
+#pagination {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 30px;
+  max-width: 100%;
+  width: 350px;
+}
+
+#pagination::before {
+  content: "";
+  background-color: var(--pagination--line--border--empty);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  z-index: -1;
+}
+
+.progress {
+  background-color: var(--pagination--line--border--fill);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 0%;
+  z-index: -1;
+  transition: 0.4s ease;
+}
+
+.circle {
+  background-color: #fff;
+  color: #999;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--pagination--line--border--empty);
+  transition: 0.4s ease;
+}
+
+.circle.active {
+  border-color: var(--pagination--line--border--fill);
+}
+
+#pagination__container .btn {
+  background-color: var(--pagination--line--border--fill);
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 30px;
+  margin: 5px;
+  font-size: 14px;
+}
+
+#pagination__container .btn:active {
+  transform: scale(0.98);
+}
+#pagination__container .btn:focus {
+  outline: none;
+}
+#pagination__container .btn:disabled {
+  background-color: var(--pagination--line--border--empty);
+  cursor: not-allowed;
+}
+
 /* ---------- TOP MOVIES BAR ---------- */
 #application__sidebar--container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 5em;
+  margin-top: 10em;
   margin-left: 0;
 }
 #application__sidebar--container h6 {
@@ -270,6 +385,11 @@
     grid-row: 2/3;
     grid-column: 2/3;
   }
+  #searchbar__container input {
+    border-radius: 1em;
+    border: 1px solid black;
+    height: var(--desktop--searchinput-height);
+  }
   #categories__container {
     /* margin: auto; */
     grid-row: 2/3;
@@ -279,8 +399,42 @@
     grid-row: 1/2;
   }
   #application__movies--container {
-    row-gap: 1em;
+    row-gap: 1.5em;
+    column-gap: 1.5em;
     grid-template-columns: repeat(4, 1fr);
+  }
+  #application__sidebar--container {
+    margin: 7em auto;
+    width: fit-content;
+  }
+  /* ---------- TOP MOVIES BAR ---------- */
+  #application__sidebar--container ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* ---------- WATHCLIST BUTTON ---------- */
+
+  #watchlist__container {
+    grid-column: 2/3;
+    margin-right: 0;
+  }
+
+  #watchlist__container .watchlist .watchlist--btn {
+    width: var(--mobile--watchlist--width);
+    height: var(--mobile--watchlist--height);
+  }
+
+  /* ---------- SEARCH BUTTON ---------- */
+  #search__btn--container {
+    width: 200px;
+    grid-column: 1/3;
+    grid-row: 3/4;
+  }
+
+  /* ---------- PAGINATION --------- */
+  #pagination__container {
+    grid-column: 1/5;
   }
 }
 
@@ -303,9 +457,6 @@
     padding: 0;
   }
 
-  #watchlist__container {
-    margin-right: 0;
-  }
   /* ---------- TITLE ---------- */
 
   #brand__container .title h1 {
@@ -340,9 +491,19 @@
     height: var(--desktop--category--height);
   }
   /* ---------- WATHCLIST BUTTON ---------- */
+  #watchlist__container {
+    margin-right: 0;
+    grid-column: 3/4;
+  }
   #watchlist__container .watchlist .watchlist--btn {
     width: var(--desktop--watchlist--width);
     height: var(--desktop--watchlist--height);
+  }
+
+  #search__btn--container {
+    grid-row: 2/3;
+    grid-column: 3/4;
+    width: 200px;
   }
   /* ---------- MOVIE CONTAINER SECTION ---------- */
 
@@ -360,5 +521,19 @@
   .watchlist--btn {
     width: var(--desktop--watchlist--button--width);
     height: var(--desktop--watchlist--button--width);
+  }
+
+  #application__sidebar--container {
+    margin-top: 10em;
+    margin-left: 0;
+  }
+  /* ---------- TOP MOVIES BAR ---------- */
+  #application__sidebar--container ul {
+    display: block;
+  }
+
+  /* ---------- PAGINATION --------- */
+  #pagination__container {
+    grid-column: 1/5;
   }
 }
