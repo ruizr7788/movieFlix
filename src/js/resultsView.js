@@ -25,8 +25,8 @@ class ResultsView extends View {
     return [query, yearValue, genreValue];
   }
 
-  renderMovies(movies) {
-    const markup = this.generateMarkup(movies);
+  renderMovies(movies, size) {
+    const markup = this.generateMarkup(movies, size);
     this.#moviesContainer.innerHTML = "";
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
   }
@@ -42,10 +42,10 @@ class ResultsView extends View {
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
-  generateMarkup(movies) {
+  generateMarkup(movies, size) {
     return movies
       .map((movie) => {
-        if (window.innerWidth > 1200) {
+        if (size === "desktop") {
           return `
           <div class="movie--card">
               <img src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
