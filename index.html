@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/flix-logos/Flix-logos.jpeg" />
     <link rel="stylesheet" href="/css/style.css" />
+    <script defer src="/src/js/controller.js" type="module"></script>
     <title>Flix</title>
   </head>
   <body>
@@ -16,13 +17,13 @@
             <img src="/images/flix-logos/Flix-logos_transparent.png" />
           </div>
         </div>
-        <form id="searchbar__container">
+        <div id="searchbar__container">
           <input id="query" type="text" placeholder="Search for movie" />
-        </form>
+        </div>
         <div id="categories__container">
           <div id="genre__container">
             <select name="genreSelection" id="genreSelection">
-              <option value="default">Genre</option>
+              <option value="all" selected>Genre</option>
               <option value="all">All</option>
               <option value="action">Action</option>
               <option value="adventure">Adventure</option>
@@ -39,7 +40,7 @@
           </div>
           <div id="year__container">
             <select name="yearSelection" id="yearSelection">
-              <option value="defualt">Year</option>
+              <option value="all" selected>Year</option>
               <option value="2022">2022</option>
               <option value="2021">2021</option>
               <option value="2020">2020</option>
@@ -65,7 +66,16 @@
       </section>
       <section id="application__movies--container">
         <div id="movies__container">
-          <!-- placeholder card -->
+          <!------------ loading spinner ------------>
+          <!-- <div class="spinner"></div> -->
+
+          <!------------ error message ------------>
+          <!-- <div id="no__movies--error">
+            <img src="/images/noresults.png" alt="" />
+            <h1>Sorry no results</h1>
+          </div> -->
+
+          <!------------ placeholder card ------------>
           <div class="movie--card-placeholder">
             <img src="/images/moviePlaceholder.jpg" alt="" />
           </div>
@@ -128,45 +138,45 @@
     <section id="application__sidebar--container">
       <h6>Top 10 Movies</h6>
       <ul class="top--movies">
-        <li class="top-1">
+        <li class="top--movie top-1">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>Scream</span>
+          <span class="movie--title">Scream</span>
         </li>
-        <li class="top-2">
+        <li class="top--movie top-2">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>Jackass Forever</span>
+          <span class="movie--title">Jackass Forever</span>
         </li>
-        <li class="top-3">
+        <li class="top--movie top-3">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>Kimi</span>
+          <span class="movie--title">Kimi</span>
         </li>
-        <li class="top-4">
+        <li class="top--movie top-4">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>I Want You Back</span>
+          <span class="movie--title">I Want You Back</span>
         </li>
-        <li class="top-5">
+        <li class="top--movie top-5">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>The Batman</span>
+          <span class="movie--title">The Batman</span>
         </li>
-        <li class="top-6">
+        <li class="top--movie top-6">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>Fresh</span>
+          <span class="movie--title">Fresh</span>
         </li>
-        <li class="top-7">
+        <li class="top--movie top-7">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>Deep Water</span>
+          <span class="movie--title">Deep Water</span>
         </li>
-        <li class="top-8">
+        <li class="top--movie top-8">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>Windfall</span>
+          <span class="movie--title">Windfall</span>
         </li>
-        <li class="top-9">
+        <li class="top--movie top-9">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>X</span>
+          <span class="movie--title">X</span>
         </li>
-        <li class="top-10">
+        <li class="top--movie top-10">
           <img src="/images/moviePlaceholder.jpg" alt="" />
-          <span>The Lost City</span>
+          <span class="movie--title">The Lost City</span>
         </li>
       </ul>
     </section>

@@ -37,10 +37,10 @@
   --desktop--movie-card-height: 300px;
   --desktop--movie--footer--width: 200px;
   --desktop--movie--footer--height: 46px;
-  --desktop--sidebar-movie-width: 38px;
-  --desktop--sidebar-movie-height: 58px;
-  --desktop--sidebar-card-height: 58px;
-  --desktop--sidebar-card-width: 200px;
+  --desktop--sidebar-movie-width: 50px;
+  --desktop--sidebar-movie-height: 70px;
+  --desktop--sidebar-card-height: 70px;
+  --desktop--sidebar-card-width: 250px;
 
   --pagination--line--border--empty: #e0e0e0;
   --pagination--line--border--fill: #f44336;
@@ -51,9 +51,31 @@
   src: url(/fonts/ubuntu/ubuntu-regular-webfont.woff);
 }
 
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   min-height: 100vh;
   position: relative;
+}
+
+/* collective styles */
+.spinner {
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  left: 38%;
+  width: 75px;
+  height: 75px;
+  animation: spinner 2s infinite linear;
+  border: 2px dashed var(--main--red);
+  z-index: 1;
 }
 
 #main__container {
@@ -173,7 +195,24 @@ body {
   background-color: #db4a40;
 }
 
+/* ---------- NO RESULTS ERROR CONTAINER --------- */
+
+#no__movies--error {
+  max-width: fit-content;
+  text-align: center;
+  grid-column: 1/3;
+  margin: 3em auto;
+}
+
+#no__movies--error img {
+  width: 300px;
+}
+
 /* ---------- MOVIE CONTAINER SECTION ---------- */
+
+#application__movies--container {
+  position: relative;
+}
 
 #movies__container {
   max-width: fit-content;
@@ -181,6 +220,7 @@ body {
   display: grid;
   row-gap: 1em;
   column-gap: 0.5em;
+  position: relative;
   grid-template-columns: repeat(2, 1fr);
 }
 #movies__container .movie--card {
@@ -432,6 +472,23 @@ body {
     margin: 3em auto;
     width: fit-content;
   }
+  /* ---------- NO RESULTS ERROR CONTAINER --------- */
+
+  #no__movies--error {
+    grid-column: 1/5;
+    margin: 4em auto;
+  }
+
+  #no__movies--error img {
+    width: 350px;
+  }
+
+  /* ---------- spinner---------- */
+  .spinner {
+    top: 29%;
+    left: 45%;
+  }
+
   /* ---------- TOP MOVIES BAR ---------- */
   #application__sidebar--container ul {
     display: grid;
@@ -533,6 +590,20 @@ body {
     grid-column: 3/4;
     width: 200px;
   }
+
+  /* ---------- NO RESULTS ERROR CONTAINER --------- */
+
+  #no__movies--error {
+    grid-column: 1/5;
+    margin: 5em auto;
+  }
+
+  /* ---------- spinner---------- */
+  .spinner {
+    top: 20%;
+    left: 45%;
+  }
+
   /* ---------- MOVIE CONTAINER SECTION ---------- */
 
   #movies__container {
@@ -552,7 +623,7 @@ body {
   }
 
   #application__sidebar--container {
-    margin-top: 10em;
+    margin-top: 4em;
     margin-left: 0;
   }
   /* ---------- TOP MOVIES BAR ---------- */

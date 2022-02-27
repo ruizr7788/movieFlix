@@ -1,0 +1,25 @@
+{
+  "name": "moviedb",
+  "version": "1.0.0",
+  "description": "Application to search for any movie",
+  "default": "controller.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir .dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruizr7788/movieFlix.git"
+  },
+  "author": "Rafael Ruiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ruizr7788/movieFlix/issues"
+  },
+  "homepage": "https://github.com/ruizr7788/movieFlix#readme",
+  "dependencies": {
+    "core-js": "^3.21.1",
+    "parcel": "^2.3.2",
+    "regenerator-runtime": "^0.13.9"
+  }
+}
