@@ -12,6 +12,7 @@ export const state = {
   searchedMovie: [],
   resultsPerPage: 8,
   page: 1,
+  query: "",
 };
 
 export const setTopMovies = async function () {
@@ -33,6 +34,7 @@ export const setSearchedMovie = async function (query, year) {
     `,
     query
   );
+  state.query = query;
   state.searchedMovie = [...moviePage1.results, ...moviePage2.results];
 };
 

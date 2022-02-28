@@ -195,6 +195,11 @@ body {
   background-color: #db4a40;
 }
 
+/* --------- results message ---------- */
+#results__message--container {
+  grid-column: 1/3;
+}
+
 /* ---------- NO RESULTS ERROR CONTAINER --------- */
 
 #no__movies--error {
@@ -472,6 +477,12 @@ body {
     margin: 3em auto;
     width: fit-content;
   }
+
+  /* --------- results message ---------- */
+  #results__message--container {
+    margin-left: 0;
+    grid-column: 1/5;
+  }
   /* ---------- NO RESULTS ERROR CONTAINER --------- */
 
   #no__movies--error {
@@ -591,6 +602,12 @@ body {
     width: 200px;
   }
 
+  /* --------- results message ---------- */
+  #results__message--container {
+    margin-left: 0;
+    grid-column: 1/5;
+  }
+
   /* ---------- NO RESULTS ERROR CONTAINER --------- */
 
   #no__movies--error {
@@ -607,7 +624,7 @@ body {
   /* ---------- MOVIE CONTAINER SECTION ---------- */
 
   #movies__container {
-    padding: 4em 0;
+    padding: 2em 0 1em 0;
     row-gap: 1em;
     column-gap: 1em;
   }

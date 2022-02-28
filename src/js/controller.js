@@ -24,7 +24,12 @@ const controlSearchResults = async function (query, year, genre) {
 
     // render movies
     const size = window.innerWidth > 1200 ? "desktop" : "mobile";
-    resultsView.renderMovies(model.getSearchResultsPage(1), size);
+    resultsView.renderMovies(
+      model.getSearchResultsPage(1),
+      size,
+      model.state,
+      query
+    );
   } catch (err) {
     resultsView.renderError(query);
   }
@@ -40,14 +45,18 @@ const controlWindow = function (currentSize, newSize) {
   if (currentSize === newSize) {
     resultsView.renderMovies(
       model.getSearchResultsPage(model.state.page),
-      newSize
+      newSize,
+      model.state,
+      query
     );
   }
 
   if (currentSize !== newSize) {
     resultsView.renderMovies(
       model.getSearchResultsPage(model.state.page),
-      newSize
+      newSize,
+      model.state,
+      query
     );
   }
 };
@@ -55,7 +64,12 @@ const controlWindow = function (currentSize, newSize) {
 const controlPagination = function () {
   // render new movies
   const size = window.innerWidth > 1200 ? "desktop" : "mobile";
-  resultsView.renderMovies(model.getSearchResultsPage(model.state.page), size);
+  resultsView.renderMovies(
+    model.getSearchResultsPage(model.state.page),
+    size,
+    model.state,
+    query
+  );
 };
 
 const init = function () {

@@ -1,3 +1,4 @@
+import { mark } from "regenerator-runtime";
 import View from "./views/view";
 
 class ResultsView extends View {
@@ -25,10 +26,16 @@ class ResultsView extends View {
     return [query, yearValue, genreValue];
   }
 
-  renderMovies(movies, size) {
+  renderMovies(movies, size, state) {
     const markup = this.generateMarkup(movies, size);
+    const resultsMessageMarkup = this.generateResultMessage(state.query, state);
+    console.log(resultsMessageMarkup);
     this.#moviesContainer.innerHTML = "";
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
+    this.#moviesContainer.insertAdjacentHTML(
+      "afterbegin",
+      resultsMessageMarkup
+    );
   }
 
   renderError(query) {
@@ -40,6 +47,20 @@ class ResultsView extends View {
       `;
     this.#moviesContainer.innerHTML = "";
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  generateResultMessage(query, state) {
+    const numOfPages = Math.ceil(state.searchedMovie.length / 8);
+    console.log(numOfPages);
+    return `
+    <div id="results__message--container">
+      <div>
+        <p id="results__message">
+          Showing results for '${query}' Page ${state.page} of ${numOfPages}
+        </p>
+      </div>
+    </div>
+    `;
   }
 
   generateMarkup(movies, size) {
