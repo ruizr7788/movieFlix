@@ -6,6 +6,7 @@ import topMoviesView from "./views/topMoviesView";
 import resultsView from "./resultsView";
 import * as model from "./model";
 import responsiveCardView from "./views/responsiveCardView";
+import paginationView from "./views/paginationView";
 
 const controlTopMovies = async function () {
   await model.setTopMovies();
@@ -17,13 +18,13 @@ const controlSearchResults = async function (query, year, genre) {
     //   if(!query && year && genre) View.renderError()
     await model.setSearchedMovie(query, year);
 
-    // render error
+    // throw error
     if (!model.state.searchedMovie || model.state.searchedMovie.length === 0)
       throw new Error("No results");
 
-    const size = window.innerWidth > 1200 ? "desktop" : "mobile";
     // render movies
-    resultsView.renderMovies(model.state.searchedMovie, size);
+    const size = window.innerWidth > 1200 ? "desktop" : "mobile";
+    resultsView.renderMovies(model.getSearchResultsPage(1), size);
   } catch (err) {
     resultsView.renderError(query);
   }
@@ -37,17 +38,30 @@ const controlWindow = function (currentSize, newSize) {
     return;
 
   if (currentSize === newSize) {
-    resultsView.renderMovies(model.state.searchedMovie, newSize);
+    resultsView.renderMovies(
+      model.getSearchResultsPage(model.state.page),
+      newSize
+    );
   }
 
   if (currentSize !== newSize) {
-    resultsView.renderMovies(model.state.searchedMovie, newSize);
+    resultsView.renderMovies(
+      model.getSearchResultsPage(model.state.page),
+      newSize
+    );
   }
+};
+
+const controlPagination = function () {
+  // render new movies
+  const size = window.innerWidth > 1200 ? "desktop" : "mobile";
+  resultsView.renderMovies(model.getSearchResultsPage(model.state.page), size);
 };
 
 const init = function () {
   resultsView.addHandlerRender(controlSearchResults);
   controlTopMovies();
   responsiveCardView.addHandlerRender(controlWindow);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
