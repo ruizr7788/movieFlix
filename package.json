@@ -2,10 +2,10 @@
   "name": "moviedb",
   "version": "1.0.0",
   "description": "Application to search for any movie",
-  "default": "controller.js",
+  "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir .dist"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "repository": {
     "type": "git",

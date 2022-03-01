@@ -232,6 +232,16 @@ body {
   width: 300px;
 }
 
+/* ------------- START SEARCHING PLACEHOLDER IMAGE --------- */
+#placeholder__image--container {
+  width: fit-content;
+  grid-column: 1/3;
+  margin: auto;
+}
+#placeholder__image {
+  width: 350px;
+}
+
 /* ----------- MOVIE MODAL ---------- */
 #movie__modal--container {
   z-index: 2;
@@ -345,7 +355,6 @@ body {
 }
 
 .cast--img {
-  background-image: url(/images/exampleCast.jpg);
   background-size: cover;
   background-position: 1em 1em 1em 1em;
   background-repeat: no-repeat;
@@ -672,6 +681,14 @@ body {
     width: 350px;
   }
 
+  /* ------------- START SEARCHING PLACEHOLDER IMAGE --------- */
+  #placeholder__image--container {
+    grid-column: 1/5;
+  }
+  #placeholder__image {
+    width: 500px;
+  }
+
   /* ---------- spinner---------- */
   .spinner {
     top: 29%;
@@ -819,6 +836,14 @@ body {
   #no__movies--error {
     grid-column: 1/5;
     margin: 5em auto;
+  }
+
+  /* ------------- START SEARCHING PLACEHOLDER IMAGE --------- */
+  #placeholder__image--container {
+    grid-column: 1/5;
+  }
+  #placeholder__image {
+    width: 800px;
   }
 
   /* ---------- spinner---------- */

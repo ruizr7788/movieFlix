@@ -9,6 +9,7 @@ class ModalView {
   #description = document.getElementById("description");
   #castContainer = document.getElementById("cast__list");
   #closeModalBtn = document.getElementById("close__modal--btn");
+  #whereToWatch = document.getElementById("where__to--watch");
   _overlay = document.querySelector(".overlay");
 
   addHandlerRender(handler) {
@@ -24,6 +25,8 @@ class ModalView {
   openModal(movieData) {
     const thisKey = this;
     //   https://image.tmdb.org/t/p/original
+    console.log(movieData.whereToWatch?.rent);
+    this.#whereToWatch.textContent = movieData.whereToWatch;
     this.#modalImage.setAttribute("src", movieData.posterPath);
     this.#yearRuntime.textContent = `${movieData.releaseYear}• ${movieData.duration}`;
     this.#directors.textContent = `${movieData.directors.join(",   ")}`;

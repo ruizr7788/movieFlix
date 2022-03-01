@@ -40,7 +40,7 @@ class ResultsView extends View {
   renderError(query) {
     const markup = `
         <div id="no__movies--error">
-            <img src="/noresults.e01aeb9b.png" alt="" />
+            <img src="https://i.pinimg.com/originals/7a/1c/f2/7a1cf2206c2a112f413888d20794c323.png" alt="" />
             <h1>Sorry no results for '${query}'</h1>
         </div>
       `;

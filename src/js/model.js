@@ -71,7 +71,12 @@ export const setMovieData = async function (movieID) {
   const watchProviders = await getJSON(
     `https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=0a7f9d58833ce9dec435ed7e2632983c&region=US`
   );
-  const resultsUS = watchProviders.results?.US || "Only in theatres";
+  const resultsUS =
+    (watchProviders.results?.US &&
+      watchProviders.results.US.rent
+        .map((result) => result.provider_name)
+        .slice(0, 4)) ||
+    "Only in theatres";
 
   // get movie credits ----------
 
