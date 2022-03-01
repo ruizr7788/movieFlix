@@ -3,10 +3,11 @@ import "regenerator-runtime/runtime";
 import { async } from "regenerator-runtime";
 
 import topMoviesView from "./views/topMoviesView";
-import resultsView from "./resultsView";
+import resultsView from "./views/resultsView";
 import * as model from "./model";
 import responsiveCardView from "./views/responsiveCardView";
 import paginationView from "./views/paginationView";
+import modalView from "./views/modalView";
 
 const controlTopMovies = async function () {
   await model.setTopMovies();
@@ -72,10 +73,16 @@ const controlPagination = function () {
   );
 };
 
+const controlModalView = async function (movieID) {
+  await model.setMovieData(movieID);
+  modalView.openModal(model.state.movieData);
+};
+
 const init = function () {
   resultsView.addHandlerRender(controlSearchResults);
   controlTopMovies();
   responsiveCardView.addHandlerRender(controlWindow);
   paginationView.addHandlerClick(controlPagination);
+  modalView.addHandlerRender(controlModalView);
 };
 init();

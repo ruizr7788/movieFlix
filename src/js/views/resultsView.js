@@ -1,5 +1,5 @@
 import { mark } from "regenerator-runtime";
-import View from "./views/view";
+import View from "./view";
 
 class ResultsView extends View {
   #submitBTN = document.querySelector(".submit--btn");
@@ -29,7 +29,6 @@ class ResultsView extends View {
   renderMovies(movies, size, state) {
     const markup = this.generateMarkup(movies, size);
     const resultsMessageMarkup = this.generateResultMessage(state.query, state);
-    console.log(resultsMessageMarkup);
     this.#moviesContainer.innerHTML = "";
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
     this.#moviesContainer.insertAdjacentHTML(
@@ -51,7 +50,6 @@ class ResultsView extends View {
 
   generateResultMessage(query, state) {
     const numOfPages = Math.ceil(state.searchedMovie.length / 8);
-    console.log(numOfPages);
     return `
     <div id="results__message--container">
       <div>
@@ -68,8 +66,8 @@ class ResultsView extends View {
       .map((movie) => {
         if (size === "desktop") {
           return `
-          <div class="movie--card">
-              <img src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
+          <div class="movie--card" data-id="${movie.id}">
+              <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
               <div class="card--footer">
                   <div class="card--footer-title">
                       <h4>${movie.title}</h4>
@@ -82,8 +80,8 @@ class ResultsView extends View {
         `;
         } else {
           return `
-          <div class="movie--card">
-              <img src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
+          <div class="movie--card" data-id="${movie.id}">
+              <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
               <div class="add--to-watchlist-btn">
                   <button type="button" class="watchlist--btn">+</button>
               </div>
