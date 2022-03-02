@@ -68,13 +68,18 @@ class ResultsView extends View {
   generateMarkup(mediaArr, size) {
     return mediaArr
       .map((media) => {
+        console.log(media);
         if (size === "desktop") {
           return `
           <div class="movie--card" data-id="${media.id}">
               <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${media.poster_path}`}" alt="" />
               <div class="card--footer">
                   <div class="card--footer-title">
-                      <h4>${media.title}</h4>
+                      <h4>${media.title ? media.title : media.name} (${
+            media.release_date
+              ? media.release_date.slice(0, 4)
+              : media.first_air_date.slice(0, 4)
+          })</h4>
                   </div>
                   <div class="card--footer-btn">
                       <button type="button" class="watchlist--btn">+</button>
