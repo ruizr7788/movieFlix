@@ -77,8 +77,8 @@ class ResultsView extends View {
                   <div class="card--footer-title">
                       <h4>${media.title ? media.title : media.name} (${
             media.release_date
-              ? media.release_date.slice(0, 4)
-              : media.first_air_date.slice(0, 4)
+              ? media.release_date?.slice(0, 4) ?? ""
+              : media.first_air_date?.slice(0, 4) ?? ""
           })</h4>
                   </div>
                   <div class="card--footer-btn">

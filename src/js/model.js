@@ -133,7 +133,7 @@ export const setMediaData = async function (mediaID) {
       mediaData.runtime % 60
     }m`;
   } else if (mediaType === "show") {
-    mediaState.mediaData.creator = mediaData.created_by[0].name;
+    mediaState.mediaData.creator = mediaData.created_by[0]?.name || "";
     mediaState.mediaData.releaseYear = mediaData.first_air_date.slice(0, 4);
     mediaState.mediaData.duration = `${mediaData.episode_run_time}m`;
   }
