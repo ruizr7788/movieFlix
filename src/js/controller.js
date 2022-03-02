@@ -9,28 +9,52 @@ import responsiveCardView from "./views/responsiveCardView";
 import paginationView from "./views/paginationView";
 import modalView from "./views/modalView";
 
+let mediaState;
+
 const controlTopMovies = async function () {
   await model.setTopMovies();
-  topMoviesView.renderTopMovies(model.state.topMovies);
+  topMoviesView.renderTopMovies(model.state.movie.topMovies);
 };
 
-const controlSearchResults = async function (query, year, genre) {
+const controlSearchResults = async function (query, year, type) {
   try {
+    mediaState = type === "movies" ? model.state.movie : model.state.show;
+
     //   if(!query && year && genre) View.renderError()
-    await model.setSearchedMovie(query, year);
+    console.log(query, year, type);
 
-    // throw error
-    if (!model.state.searchedMovie || model.state.searchedMovie.length === 0)
-      throw new Error("No results");
+    if (type === "movies") {
+      await model.setSearchedMedia(query, year, type);
+      console.log(mediaState);
+      // throw error
+      if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
+        throw new Error("No results");
 
-    // render movies
-    const size = window.innerWidth > 1200 ? "desktop" : "mobile";
-    resultsView.renderMovies(
-      model.getSearchResultsPage(1),
-      size,
-      model.state,
-      query
-    );
+      // render movies
+      const size = window.innerWidth > 1200 ? "desktop" : "mobile";
+      resultsView.renderResults(
+        model.getSearchResultsPage(1),
+        size,
+        mediaState,
+        query
+      );
+    } else if (type === "shows") {
+      await model.setSearchedMedia(query, year, type);
+      // throw error
+      if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
+        throw new Error("No results");
+
+      console.log("something");
+      console.log(mediaState);
+      // render shows
+      const size = window.innerWidth > 1200 ? "desktop" : "mobile";
+      resultsView.renderResults(
+        model.getSearchResultsPage(1),
+        size,
+        mediaState,
+        query
+      );
+    }
   } catch (err) {
     resultsView.renderError(query);
   }
@@ -40,23 +64,26 @@ const controlWindow = function (currentSize, newSize) {
   // this function will listen for the window and if it passes above 1200 then movie cards will change else if it passes below it will also change to mobile movie cards
   //   if (currentSize === newSize) return;
 
-  if (!model.state.searchedMovie || model.state.searchedMovie.length === 0)
+  if (
+    !model.movieState.searchedMovie ||
+    model.movieState.searchedMovie.length === 0
+  )
     return;
 
   if (currentSize === newSize) {
-    resultsView.renderMovies(
-      model.getSearchResultsPage(model.state.page),
+    resultsView.renderResults(
+      model.getMovieSearchResultsPage(model.movieState.page),
       newSize,
-      model.state,
+      model.movieState,
       query
     );
   }
 
   if (currentSize !== newSize) {
-    resultsView.renderMovies(
-      model.getSearchResultsPage(model.state.page),
+    resultsView.renderResults(
+      model.getMovieSearchResultsPage(model.movieState.page),
       newSize,
-      model.state,
+      model.movieState,
       query
     );
   }
@@ -65,22 +92,22 @@ const controlWindow = function (currentSize, newSize) {
 const controlPagination = function () {
   // render new movies
   const size = window.innerWidth > 1200 ? "desktop" : "mobile";
-  resultsView.renderMovies(
+  resultsView.renderResults(
     model.getSearchResultsPage(model.state.page),
     size,
-    model.state,
+    mediaState,
     query
   );
 };
 
-const controlModalView = async function (movieID) {
-  await model.setMovieData(movieID);
-  modalView.openModal(model.state.movieData);
+const controlModalView = async function (mediaID) {
+  await model.setMediaData(mediaID);
+  modalView.openModal(mediaState);
 };
 
 const init = function () {
-  resultsView.addHandlerRender(controlSearchResults);
   controlTopMovies();
+  resultsView.addHandlerRender(controlSearchResults);
   responsiveCardView.addHandlerRender(controlWindow);
   paginationView.addHandlerClick(controlPagination);
   modalView.addHandlerRender(controlModalView);

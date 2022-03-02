@@ -5,7 +5,7 @@ class ResultsView extends View {
   #submitBTN = document.querySelector(".submit--btn");
   #input = document.getElementById("query");
   #yearSelection = document.getElementById("yearSelection");
-  #genreSelection = document.getElementById("genreSelection");
+  #typeSelection = document.getElementById("typeSelection");
   #moviesContainer = document.getElementById("movies__container");
 
   addHandlerRender(handler) {
@@ -21,14 +21,17 @@ class ResultsView extends View {
     const query = this.#input.value;
     const yearValue =
       this.#yearSelection.options[this.#yearSelection.selectedIndex].value;
-    const genreValue =
-      this.#genreSelection.options[this.#genreSelection.selectedIndex].value;
-    return [query, yearValue, genreValue];
+    const typeSelected =
+      this.#typeSelection.options[this.#typeSelection.selectedIndex].value;
+    return [query, yearValue, typeSelected];
   }
 
-  renderMovies(movies, size, state) {
+  renderMovies(movies, size, movieState) {
     const markup = this.generateMarkup(movies, size);
-    const resultsMessageMarkup = this.generateResultMessage(state.query, state);
+    const resultsMessageMarkup = this.generateResultMessage(
+      movieState.query,
+      movieState
+    );
     this.#moviesContainer.innerHTML = "";
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
     this.#moviesContainer.insertAdjacentHTML(
@@ -48,13 +51,13 @@ class ResultsView extends View {
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
-  generateResultMessage(query, state) {
-    const numOfPages = Math.ceil(state.searchedMovie.length / 8);
+  generateResultMessage(query, movieState) {
+    const numOfPages = Math.ceil(movieState.searchedMovie.length / 8);
     return `
     <div id="results__message--container">
       <div>
         <p id="results__message">
-          Showing results for '${query}' Page ${state.page} of ${numOfPages}
+          Showing results for '${query}' Page ${movieState.page} of ${numOfPages}
         </p>
       </div>
     </div>

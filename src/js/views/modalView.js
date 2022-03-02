@@ -15,28 +15,27 @@ class ModalView {
   addHandlerRender(handler) {
     const thisKey = this;
     this.#movieContainer.addEventListener("click", function (e) {
-      const movie = e.target.closest(".movie--card-img").parentNode;
-      if (!movie) return;
-      const movieID = movie.dataset.id;
-      handler(movieID);
+      const media = e.target.closest(".movie--card-img").parentNode;
+      if (!media) return;
+      const mediaID = media.dataset.id;
+      handler(mediaID);
     });
   }
 
-  openModal(movieData) {
+  openModal(mediaData) {
     const thisKey = this;
     //   https://image.tmdb.org/t/p/original
-    console.log(movieData.whereToWatch?.rent);
-    this.#whereToWatch.textContent = movieData.whereToWatch;
-    this.#modalImage.setAttribute("src", movieData.posterPath);
-    this.#yearRuntime.textContent = `${movieData.releaseYear}• ${movieData.duration}`;
-    this.#directors.textContent = `${movieData.directors.join(",   ")}`;
+    this.#whereToWatch.textContent = mediaData.whereToWatch;
+    this.#modalImage.setAttribute("src", mediaData.posterPath);
+    this.#yearRuntime.textContent = `${mediaData.releaseYear}• ${mediaData.duration}`;
+    this.#directors.textContent = `${mediaData.directors.join(",   ")}`;
     // this.#addToWatchlist.addEventListener('click', addToWatchlist)
     this.#genresContainer.innerHTML = this.generateGenreMarkup(
-      movieData.genres
+      mediaData.genres
     );
-    this.#description.textContent = movieData.description;
-    this.#castContainer.innerHTML = this.generateCastMarkup(movieData.actors);
-    this.renderActorImage(movieData.actors);
+    this.#description.textContent = mediaData.description;
+    this.#castContainer.innerHTML = this.generateCastMarkup(mediaData.actors);
+    this.renderActorImage(mediaData.actors);
 
     this._overlay.classList.remove("hidden");
 
