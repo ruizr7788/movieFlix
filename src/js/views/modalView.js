@@ -22,20 +22,27 @@ class ModalView {
     });
   }
 
-  openModal(mediaData) {
+  openModal(mediaState) {
     const thisKey = this;
     //   https://image.tmdb.org/t/p/original
-    this.#whereToWatch.textContent = mediaData.whereToWatch;
-    this.#modalImage.setAttribute("src", mediaData.posterPath);
-    this.#yearRuntime.textContent = `${mediaData.releaseYear}• ${mediaData.duration}`;
-    this.#directors.textContent = `${mediaData.directors.join(",   ")}`;
+    this.#whereToWatch.textContent = mediaState.mediaData.whereToWatch;
+    this.#modalImage.setAttribute("src", mediaState.mediaData.posterPath);
+    this.#yearRuntime.textContent = `${mediaState.mediaData.releaseYear}• ${mediaState.mediaData.duration}`;
+    console.log(mediaState);
+    this.#directors.textContent = `${
+      mediaState.mediaData.directors
+        ? mediaState.mediaData.directors?.join(",   ")
+        : mediaState.mediaData.creator
+    }`;
     // this.#addToWatchlist.addEventListener('click', addToWatchlist)
     this.#genresContainer.innerHTML = this.generateGenreMarkup(
-      mediaData.genres
+      mediaState.mediaData.genres
     );
-    this.#description.textContent = mediaData.description;
-    this.#castContainer.innerHTML = this.generateCastMarkup(mediaData.actors);
-    this.renderActorImage(mediaData.actors);
+    this.#description.textContent = mediaState.mediaData.description;
+    this.#castContainer.innerHTML = this.generateCastMarkup(
+      mediaState.mediaData.actors
+    );
+    this.renderActorImage(mediaState.mediaData.actors);
 
     this._overlay.classList.remove("hidden");
 

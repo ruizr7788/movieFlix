@@ -91,56 +91,58 @@ export const getSearchResultsPage = function (page = state.page, type) {
 
 export const setMediaData = async function (mediaID) {
   // movie data ----------------------------
-  const mediaData = helper.getMediaData(mediaID);
+  const mediaData = await helper.getMediaData(mediaID, mediaType);
 
   // watch provider list ------------------
-  const watchProviders = helper.getWatchProviders(mediaID);
+  const watchProvidersData = await helper.getWatchProviders(mediaID, mediaType);
 
   // movie credits -------------------------
   //  https://image.tmdb.org/t/p/original
-  const mediaCredits = helper.getMediaCredits(mediaID);
+  const mediaCredits = await helper.getMediaCredits(mediaID, mediaType);
+
+  let watchProviders = [];
 
   if (mediaType === "movie") {
-    const watchProviderResults =
-      (watchProviders.results?.US &&
-        watchProviders.results.US.rent
+    watchProviders =
+      (watchProvidersData.results?.US &&
+        watchProvidersData.results.US.rent
           .map((result) => result.provider_name)
           .slice(0, 4)) ||
       "Only in theatres";
   }
   if (mediaType === "show") {
-    const watchProviderResults =
-      (watchProviders.results?.US &&
-        watchProviders.results.US.buy
+    watchProviders =
+      (watchProvidersData.results.US &&
+        watchProvidersData.results.US.buy &&
+        watchProvidersData.results.US.buy
           .map((result) => result.provider_name)
           .slice(0, 4)) ||
       "Only on tv providers";
   }
 
-  const topActors = movieCredits.cast.slice(0, 6);
+  const topActors = mediaCredits.cast.slice(0, 6);
 
-  // movie
   if (mediaType === "movie") {
     mediaCredits.crew.map((person) => {
       if (person.known_for_department === "Directing") {
-        mediaState.directors.push(person.name);
+        mediaState.mediaData.directors.push(person.name);
       }
     });
-    mediaState.releaseYear = mediaData.release_date.slice(0, 4);
-    mediaState.duration = `${Math.floor(mediaData.runtime / 60)}h ${
+    mediaState.mediaData.releaseYear = mediaData.release_date.slice(0, 4);
+    mediaState.mediaData.duration = `${Math.floor(mediaData.runtime / 60)}h ${
       mediaData.runtime % 60
     }m`;
   } else if (mediaType === "show") {
-    mediaState.creator = mediaData.created_by[0].name;
-    mediaState.releaseYear = mediaData.first_air_date.slice(0, 4);
-    mediaState.duration = `${mediaData.episode_run_time}m`;
+    mediaState.mediaData.creator = mediaData.created_by[0].name;
+    mediaState.mediaData.releaseYear = mediaData.first_air_date.slice(0, 4);
+    mediaState.mediaData.duration = `${mediaData.episode_run_time}m`;
   }
 
-  mediaState.posterPath = `https://image.tmdb.org/t/p/original${mediaData.poster_path}`;
-  mediaState.description = mediaData.overview;
-  mediaState.actors = topActors;
-  mediaState.genres = mediaData.genres;
-  mediaState.whereToWatch = watchProviderResults;
+  mediaState.mediaData.posterPath = `https://image.tmdb.org/t/p/original${mediaData.poster_path}`;
+  mediaState.mediaData.description = mediaData.overview;
+  mediaState.mediaData.actors = topActors;
+  mediaState.mediaData.genres = mediaData.genres;
+  mediaState.mediaData.whereToWatch = watchProviders;
 };
 
 // //////////////////////////////////////////////////////////////////
@@ -154,7 +156,6 @@ next.addEventListener("click", () => {
     currentPage = circles.length;
   }
   updatePagination();
-  console.log(currentPage);
 });
 
 prev.addEventListener("click", () => {

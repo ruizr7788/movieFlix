@@ -26,11 +26,12 @@ class ResultsView extends View {
     return [query, yearValue, typeSelected];
   }
 
-  renderMovies(movies, size, movieState) {
-    const markup = this.generateMarkup(movies, size);
+  renderResults(mediaArr, size, mediaState, state) {
+    const markup = this.generateMarkup(mediaArr, size);
     const resultsMessageMarkup = this.generateResultMessage(
-      movieState.query,
-      movieState
+      mediaState.query,
+      mediaState,
+      state
     );
     this.#moviesContainer.innerHTML = "";
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
@@ -51,29 +52,29 @@ class ResultsView extends View {
     this.#moviesContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
-  generateResultMessage(query, movieState) {
-    const numOfPages = Math.ceil(movieState.searchedMovie.length / 8);
+  generateResultMessage(query, mediaState, state) {
+    const numOfPages = Math.ceil(mediaState.searchedMedia.length / 8);
     return `
     <div id="results__message--container">
       <div>
         <p id="results__message">
-          Showing results for '${query}' Page ${movieState.page} of ${numOfPages}
+          Showing results for '${query}' Page ${state.page} of ${numOfPages}
         </p>
       </div>
     </div>
     `;
   }
 
-  generateMarkup(movies, size) {
-    return movies
-      .map((movie) => {
+  generateMarkup(mediaArr, size) {
+    return mediaArr
+      .map((media) => {
         if (size === "desktop") {
           return `
-          <div class="movie--card" data-id="${movie.id}">
-              <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
+          <div class="movie--card" data-id="${media.id}">
+              <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${media.poster_path}`}" alt="" />
               <div class="card--footer">
                   <div class="card--footer-title">
-                      <h4>${movie.title}</h4>
+                      <h4>${media.title}</h4>
                   </div>
                   <div class="card--footer-btn">
                       <button type="button" class="watchlist--btn">+</button>
@@ -83,8 +84,8 @@ class ResultsView extends View {
         `;
         } else {
           return `
-          <div class="movie--card" data-id="${movie.id}">
-              <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${movie.poster_path}`}" alt="" />
+          <div class="movie--card" data-id="${media.id}">
+              <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${media.poster_path}`}" alt="" />
               <div class="add--to-watchlist-btn">
                   <button type="button" class="watchlist--btn">+</button>
               </div>

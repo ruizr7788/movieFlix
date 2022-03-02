@@ -30,13 +30,14 @@ const controlSearchResults = async function (query, year, type) {
       if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
         throw new Error("No results");
 
-      // render movies
+      // render media
       const size = window.innerWidth > 1200 ? "desktop" : "mobile";
       resultsView.renderResults(
         model.getSearchResultsPage(1),
         size,
         mediaState,
-        query
+
+        model.state
       );
     } else if (type === "shows") {
       await model.setSearchedMedia(query, year, type);
@@ -44,15 +45,13 @@ const controlSearchResults = async function (query, year, type) {
       if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
         throw new Error("No results");
 
-      console.log("something");
-      console.log(mediaState);
       // render shows
       const size = window.innerWidth > 1200 ? "desktop" : "mobile";
       resultsView.renderResults(
         model.getSearchResultsPage(1),
         size,
         mediaState,
-        query
+        model.state
       );
     }
   } catch (err) {
@@ -64,39 +63,36 @@ const controlWindow = function (currentSize, newSize) {
   // this function will listen for the window and if it passes above 1200 then movie cards will change else if it passes below it will also change to mobile movie cards
   //   if (currentSize === newSize) return;
 
-  if (
-    !model.movieState.searchedMovie ||
-    model.movieState.searchedMovie.length === 0
-  )
+  if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
     return;
 
   if (currentSize === newSize) {
     resultsView.renderResults(
-      model.getMovieSearchResultsPage(model.movieState.page),
+      model.getSearchResultsPage(mediaState.page),
       newSize,
-      model.movieState,
-      query
+      mediaState,
+      model.state
     );
   }
 
   if (currentSize !== newSize) {
     resultsView.renderResults(
-      model.getMovieSearchResultsPage(model.movieState.page),
+      model.getSearchResultsPage(mediaState.page),
       newSize,
-      model.movieState,
-      query
+      mediaState,
+      model.state
     );
   }
 };
 
 const controlPagination = function () {
-  // render new movies
+  // render new media
   const size = window.innerWidth > 1200 ? "desktop" : "mobile";
   resultsView.renderResults(
     model.getSearchResultsPage(model.state.page),
     size,
     mediaState,
-    query
+    model.state
   );
 };
 
