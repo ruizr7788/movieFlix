@@ -66,14 +66,13 @@ export const setSearchedMedia = async function (query, year, type) {
   const searchPage2URL =
     type === "movies"
       ? helper.MOVIE_SEARCH_URL_PAGE2(query, year)
-      : helper.SHOW_SEARCH_URL_PAGE2;
+      : helper.SHOW_SEARCH_URL_PAGE2(query, year);
 
   const page1 = await helper.getJSON(searchPage1URL, query);
-  // const page2 = await helper.getJSON(searchPage2URL, query);
+  const page2 = await helper.getJSON(searchPage2URL, query);
 
   mediaState.query = query;
-  // mediaState.searchedMovie = [...page1.results, ...page2.results];
-  mediaState.searchedMedia = [...page1.results];
+  mediaState.searchedMedia = [...page1.results, ...page2.results];
 };
 
 export const getSearchResultsPage = function (page = state.page, type) {
@@ -92,6 +91,8 @@ export const getSearchResultsPage = function (page = state.page, type) {
 export const setMediaData = async function (mediaID) {
   // movie data ----------------------------
   const mediaData = await helper.getMediaData(mediaID, mediaType);
+  console.log(mediaData);
+  // IF POSTER PATH IS NULL DO NOT SHOW IN RESULTS
 
   // watch provider list ------------------
   const watchProvidersData = await helper.getWatchProviders(mediaID, mediaType);
@@ -101,24 +102,8 @@ export const setMediaData = async function (mediaID) {
   const mediaCredits = await helper.getMediaCredits(mediaID, mediaType);
 
   let watchProviders = [];
-
-  if (mediaType === "movie") {
-    watchProviders =
-      (watchProvidersData.results?.US &&
-        watchProvidersData.results.US.rent
-          .map((result) => result.provider_name)
-          .slice(0, 4)) ||
-      "Only in theatres";
-  }
-  if (mediaType === "show") {
-    watchProviders =
-      (watchProvidersData.results.US &&
-        watchProvidersData.results.US.buy &&
-        watchProvidersData.results.US.buy
-          .map((result) => result.provider_name)
-          .slice(0, 4)) ||
-      "Only on tv providers";
-  }
+  const currenteYear = new Date().getFullYear();
+  let mediaReleaseDate;
 
   const topActors = mediaCredits.cast.slice(0, 6);
 
@@ -129,13 +114,37 @@ export const setMediaData = async function (mediaID) {
       }
     });
     mediaState.mediaData.releaseYear = mediaData.release_date.slice(0, 4);
+    mediaReleaseDate = mediaData.release_date.slice(0, 4);
     mediaState.mediaData.duration = `${Math.floor(mediaData.runtime / 60)}h ${
       mediaData.runtime % 60
     }m`;
   } else if (mediaType === "show") {
     mediaState.mediaData.creator = mediaData.created_by[0]?.name || "";
     mediaState.mediaData.releaseYear = mediaData.first_air_date.slice(0, 4);
+    mediaReleaseDate = mediaData.first_air_date.slice(0, 4);
     mediaState.mediaData.duration = `${mediaData.episode_run_time}m`;
+  }
+  if (mediaType === "movie") {
+    if (watchProvidersData.results.US) {
+      watchProviders = watchProvidersData.results.US.rent
+        .map((result) => result.provider_name)
+        .slice(0, 4);
+    } else if (currenteYear - mediaReleaseDate < 2) {
+      watchProviders = "Only in theatres";
+    } else {
+      watchProviders = "Not on streaming platforms";
+    }
+  }
+  if (mediaType === "show") {
+    if (watchProvidersData.results.US && watchProvidersData.results.US.buy) {
+      watchProviders = watchProvidersData.results.US.buy
+        .map((result) => result.provider_name)
+        .slice(0, 4);
+    } else if (currenteYear - mediaReleaseDate < 2) {
+      watchProviders = "Tv providers";
+    } else {
+      watchProviders = "Not on streaming platform";
+    }
   }
 
   mediaState.mediaData.posterPath = `https://image.tmdb.org/t/p/original${mediaData.poster_path}`;

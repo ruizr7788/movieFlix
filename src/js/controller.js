@@ -25,7 +25,6 @@ const controlSearchResults = async function (query, year, type) {
 
     if (type === "movies") {
       await model.setSearchedMedia(query, year, type);
-      console.log(mediaState);
       // throw error
       if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
         throw new Error("No results");

@@ -68,7 +68,6 @@ class ResultsView extends View {
   generateMarkup(mediaArr, size) {
     return mediaArr
       .map((media) => {
-        console.log(media);
         if (size === "desktop") {
           return `
           <div class="movie--card" data-id="${media.id}">
