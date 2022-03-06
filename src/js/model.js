@@ -18,6 +18,7 @@ export const state = {
     resultsPerPage: 8,
     query: "",
     mediaData: {
+      title: "",
       directors: [],
       duration: "4h 30m",
       releaseYear: "1999",
@@ -33,6 +34,7 @@ export const state = {
     resultsPerPage: 8,
     query: "",
     mediaData: {
+      title: "",
       creator: "",
       duration: "4h 30m",
       releaseYear: "1999",
@@ -91,7 +93,6 @@ export const getSearchResultsPage = function (page = state.page, type) {
 export const setMediaData = async function (mediaID) {
   // movie data ----------------------------
   const mediaData = await helper.getMediaData(mediaID, mediaType);
-  console.log(mediaData);
   // IF POSTER PATH IS NULL DO NOT SHOW IN RESULTS
 
   // watch provider list ------------------
@@ -108,6 +109,7 @@ export const setMediaData = async function (mediaID) {
   const topActors = mediaCredits.cast.slice(0, 6);
 
   if (mediaType === "movie") {
+    mediaState.mediaData.title = mediaData.original_title;
     mediaCredits.crew.map((person) => {
       if (person.known_for_department === "Directing") {
         mediaState.mediaData.directors.push(person.name);
@@ -119,6 +121,7 @@ export const setMediaData = async function (mediaID) {
       mediaData.runtime % 60
     }m`;
   } else if (mediaType === "show") {
+    mediaState.mediaData.title = mediaData.name;
     mediaState.mediaData.creator = mediaData.created_by[0]?.name || "";
     mediaState.mediaData.releaseYear = mediaData.first_air_date.slice(0, 4);
     mediaReleaseDate = mediaData.first_air_date.slice(0, 4);

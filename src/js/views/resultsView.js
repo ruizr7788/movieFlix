@@ -69,6 +69,7 @@ class ResultsView extends View {
     return mediaArr
       .map((media) => {
         if (size === "desktop") {
+          if (!media.poster_path) return;
           return `
           <div class="movie--card" data-id="${media.id}">
               <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${media.poster_path}`}" alt="" />

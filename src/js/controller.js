@@ -21,7 +21,6 @@ const controlSearchResults = async function (query, year, type) {
     mediaState = type === "movies" ? model.state.movie : model.state.show;
 
     //   if(!query && year && genre) View.renderError()
-    console.log(query, year, type);
 
     if (type === "movies") {
       await model.setSearchedMedia(query, year, type);

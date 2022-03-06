@@ -10,6 +10,7 @@ class ModalView {
   #castContainer = document.getElementById("cast__list");
   #closeModalBtn = document.getElementById("close__modal--btn");
   #whereToWatch = document.getElementById("where__to--watch");
+  #movieTitle = document.getElementById("modal__movie--title");
   _overlay = document.querySelector(".overlay");
 
   addHandlerRender(handler) {
@@ -25,10 +26,11 @@ class ModalView {
   openModal(mediaState) {
     const thisKey = this;
     //   https://image.tmdb.org/t/p/original
+    this.#movieTitle.textContent = mediaState.mediaData.title;
     this.#whereToWatch.textContent = mediaState.mediaData.whereToWatch;
     this.#modalImage.setAttribute("src", mediaState.mediaData.posterPath);
-    this.#yearRuntime.textContent = `${mediaState.mediaData.releaseYear}• ${mediaState.mediaData.duration}`;
-    console.log(mediaState);
+    this.#yearRuntime.textContent = `${mediaState.mediaData.releaseYear} • ${mediaState.mediaData.duration}`;
+
     this.#directors.textContent = `${
       mediaState.mediaData.directors
         ? mediaState.mediaData.directors?.join(",   ")
@@ -93,9 +95,16 @@ class ModalView {
   renderActorImage(actors) {
     const castImages = document.querySelectorAll(".cast--img");
     actors.forEach((actor, i) => {
-      castImages[
-        i
-      ].style.backgroundImage = `url(https://image.tmdb.org/t/p/original${actor.profile_path})`;
+      if (actor.profile_path) {
+        castImages[
+          i
+        ].style.backgroundImage = `url(https://image.tmdb.org/t/p/original${actor.profile_path})`;
+        castImages[i].style.backgroundSize = "70px";
+        castImages[i].style.backgroundPosition = "0.7em, -2em";
+      } else {
+        castImages[i].style.backgroundSize = "contain";
+        castImages[i].style.backgroundPosition = "0em, 0em";
+      }
     });
   }
 }

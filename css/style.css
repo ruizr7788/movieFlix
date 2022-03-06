@@ -274,9 +274,14 @@ body {
 #image__container img {
   width: 150px;
 }
-#image__container p {
-  margin-top: 0.2em;
+#year__runtime {
   font-size: 15px;
+  margin-top: 0;
+}
+#modal__movie--title {
+  font-weight: bold;
+  font-size: small;
+  margin-top: 1em;
 }
 
 #directors__container {
@@ -313,19 +318,19 @@ body {
 }
 #genres ul {
   display: flex;
-  width: fit-content;
   margin-left: 0;
-  padding-bottom: 1em;
+  width: fit-content;
+  padding-bottom: 1.5em;
+  flex-wrap: wrap;
 }
 
 #genres ul li {
-  border: 1px solid var(--main--red);
-  width: fit-content;
-  margin-right: 1em;
+  margin: 0.7em 0.7em 0 0;
   list-style: none;
-  padding: 0.2em 1em;
+  border: 1px solid var(--main--red);
   border-radius: 1em;
-  flex-wrap: wrap;
+  padding: 0.2em 1em;
+  white-space: nowrap;
 }
 
 #cast__container {
@@ -355,8 +360,7 @@ body {
 }
 
 .cast--img {
-  background-size: cover;
-  background-position: 1em 1em 1em 1em;
+  background-image: url(/images/defaultCastImg.jpg);
   background-repeat: no-repeat;
   margin: 0 0.5em 0 0;
   padding: 0;
@@ -630,7 +634,6 @@ body {
 /* mobile styles */
 @media screen and (min-width: 620px) {
   #application__header--container {
-    row-gap: 2em;
     padding-top: 1em;
     align-items: center;
   }
@@ -921,9 +924,11 @@ body {
   #image__container img {
     width: 250px;
   }
-  #image__container p {
+  #year__runtime {
     font-size: 16px;
-    margin-top: 1em;
+  }
+  #modal__movie--title {
+    font-size: 15px;
   }
   #image__container {
     grid-column: 1/2;
