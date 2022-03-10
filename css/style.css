@@ -62,7 +62,10 @@
 }
 
 body {
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  /* temporary whilst styling watchlist on mobile */
+  height: 100vh;
+  overflow-y: hidden;
   position: relative;
   overflow-x: hidden;
 }
@@ -94,7 +97,7 @@ body {
   top: 0;
   width: 100vw;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.473);
+  background-color: rgba(87, 84, 84, 0.473);
 }
 
 #main__container {
@@ -631,6 +634,93 @@ body {
   color: #999;
 }
 
+/* ---------- watchlist ---------- */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#watchlist__container::-webkit-scrollbar {
+  display: none;
+}
+
+#watchlist__container {
+  font-family: ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.342);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: absolute;
+  width: 100vw;
+  height: 60vh;
+  top: 40%;
+  left: 0;
+  z-index: 2;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+#watchlist__header {
+  font-size: 14px;
+  display: flex;
+  position: sticky;
+  top: -0.1em;
+  z-index: 3;
+  background-color: white;
+  padding: 1.7em 1em;
+  box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.03);
+  justify-content: space-between;
+}
+
+.watchlist--header-title-container {
+  margin: 0;
+}
+.watchlist--header-info-container {
+  margin: 0;
+}
+
+.watchlist--item {
+  font-size: 15px;
+  width: 100%;
+  height: 120px;
+  border-radius: 9px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgb(155, 153, 153);
+  list-style: none;
+  position: relative;
+  display: flex;
+  margin-bottom: 1em;
+}
+
+#watchlist__list--container {
+  /* margin: 2em 0 2em 0; */
+  padding: 1em;
+}
+
+.watchlist--item-img {
+  margin: 0;
+}
+.watchlist--item-info {
+  margin: 1em auto 0 0.5em;
+}
+.watchlist--item-img img {
+  height: 120px;
+}
+.watchlist--item-remove {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 0.5em;
+  bottom: 0.5em;
+}
+
+.watchlist--remove-btn {
+  font-weight: normal;
+  padding: 0.3em 0.85em;
+  border: 1px solid var(--main--red);
+  border-radius: 0.4em;
+  background-color: rgba(255, 0, 0, 0.04);
+}
+
 /* ----------media queries ---------- */
 
 /* mobile styles */
@@ -758,6 +848,26 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 2em;
+  }
+
+  /* ---------- WATCHLIST ---------- */
+  #watchlist__container {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.342);
+    position: absolute;
+    width: 40%;
+    height: 100vh;
+    top: 0;
+    right: 0;
+  }
+  #watchlist__header {
+    font-size: 13px;
+  }
+
+  .watchlist--item {
+    font-size: small;
+  }
+  .watchlist--remove-btn {
+    font-size: x-small;
   }
 }
 
