@@ -58,6 +58,19 @@ const controlSearchResults = async function (query, year, type) {
   }
 };
 
+const watchlistController = function (mediaID, action, btn) {
+  console.log(mediaID, btn);
+  if (action === "add") {
+    model.state.watchlist.add(mediaID);
+    watchlistView.removeStyle(btn);
+  }
+  if (action === "remove") {
+    model.state.watchlist.delete(mediaID);
+    watchlistView.addStyle(btn);
+  }
+  console.log(model.state);
+};
+
 const controlWindow = function (currentSize, newSize) {
   // this function will listen for the window and if it passes above 1200 then movie cards will change else if it passes below it will also change to mobile movie cards
   //   if (currentSize === newSize) return;
@@ -98,10 +111,6 @@ const controlPagination = function () {
 const controlModalView = async function (mediaID) {
   await model.setMediaData(mediaID);
   modalView.openModal(mediaState);
-};
-
-const watchlistController = function (mediaID) {
-  console.log(mediaID);
 };
 
 const init = function () {
