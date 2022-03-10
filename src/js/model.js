@@ -45,6 +45,7 @@ export const state = {
       actors: [],
     },
   },
+  watchlist: [],
 };
 
 export const setTopMovies = async function () {

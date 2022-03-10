@@ -8,6 +8,7 @@ import * as model from "./model";
 import responsiveCardView from "./views/responsiveCardView";
 import paginationView from "./views/paginationView";
 import modalView from "./views/modalView";
+import watchlistView from "./views/watchlistView";
 
 let mediaState;
 
@@ -61,7 +62,7 @@ const controlWindow = function (currentSize, newSize) {
   // this function will listen for the window and if it passes above 1200 then movie cards will change else if it passes below it will also change to mobile movie cards
   //   if (currentSize === newSize) return;
 
-  if (!mediaState.searchedMedia || mediaState.searchedMedia.length === 0)
+  if (!mediaState?.searchedMedia || mediaState?.searchedMedia.length === 0)
     return;
 
   if (currentSize === newSize) {
@@ -99,11 +100,16 @@ const controlModalView = async function (mediaID) {
   modalView.openModal(mediaState);
 };
 
+const watchlistController = function (mediaID) {
+  console.log(mediaID);
+};
+
 const init = function () {
   controlTopMovies();
   resultsView.addHandlerRender(controlSearchResults);
   responsiveCardView.addHandlerRender(controlWindow);
   paginationView.addHandlerClick(controlPagination);
   modalView.addHandlerRender(controlModalView);
+  watchlistView.addHandlerRender(watchlistController);
 };
 init();

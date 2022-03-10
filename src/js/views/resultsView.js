@@ -82,7 +82,9 @@ class ResultsView extends View {
           })</h4>
                   </div>
                   <div class="card--footer-btn">
-                      <button type="button" class="watchlist--btn">+</button>
+                      <button type="button" data-media-id="${
+                        media.id
+                      }" class="add watchlist--btn">+</button>
                   </div>
               </div>
           </div>
@@ -92,7 +94,9 @@ class ResultsView extends View {
           <div class="movie--card" data-id="${media.id}">
               <img class="movie--card-img" src="${`https://image.tmdb.org/t/p/original${media.poster_path}`}" alt="" />
               <div class="add--to-watchlist-btn">
-                  <button type="button" class="watchlist--btn">+</button>
+                  <button type="button" data-media-id="${
+                    media.id
+                  }" class="add watchlist--btn mobile">+</button>
               </div>
           </div>
           `;

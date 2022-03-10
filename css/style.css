@@ -428,24 +428,35 @@ body {
   cursor: pointer;
 }
 
-#movies__container .movie--card .add--to-watchlist-btn {
+#movies__container .movie--card .watchlist--btn.mobile {
   position: absolute;
   top: -0.5em;
   left: -0.5em;
 }
-#movies__container .movie--card .add--to-watchlist-btn .watchlist--btn:hover {
-  cursor: pointer;
-  border: 1px solid lightgreen;
-}
-
 .watchlist--btn {
-  border: none;
-  outline: none;
-  color: var(--main--white-text);
-  background-color: var(--main--red);
   width: var(--mobile--watchlist--button--width);
   height: var(--mobile--watchlist--button--width);
   border-radius: 50%;
+  font-weight: bold;
+}
+.watchlist--btn:hover {
+  cursor: pointer;
+}
+.watchlist--btn.add:hover {
+  border: 1px solid lightgreen;
+}
+.watchlist--btn.add {
+  border: 1px solid white;
+  color: var(--main--white-text);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+  background-color: var(--main--red);
+}
+.watchlist--btn.remove {
+  font-weight: bold;
+  border: 1px solid rgb(105, 105, 105);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.336);
+  color: var(--main--red);
+  background-color: var(--main--white-text);
 }
 
 /* ---------- DESKTOP MOVIE CARD STYLING ------------- */
@@ -472,20 +483,11 @@ body {
   .card--footer-btn
   .watchlist--btn {
   width: var(--desktop--watchlist--button--width);
-  border: 1px solid white;
   display: flex;
   font-weight: bold;
   margin: auto;
   align-items: center;
   justify-content: center;
-}
-
-#movies__container
-  .movie--card
-  .card--footer
-  .card--footer-btn
-  .watchlist--btn:hover {
-  border: 2px solid lightgreen;
 }
 
 /* ---------- MOVIE CARD PLACEHOLDER ---------- */

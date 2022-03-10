@@ -16,6 +16,7 @@ class ModalView {
   addHandlerRender(handler) {
     const thisKey = this;
     this.#movieContainer.addEventListener("click", function (e) {
+      if (!e.target.closest(".movie--card-img")) return;
       const media = e.target.closest(".movie--card-img").parentNode;
       if (!media) return;
       const mediaID = media.dataset.id;
@@ -99,8 +100,8 @@ class ModalView {
         castImages[
           i
         ].style.backgroundImage = `url(https://image.tmdb.org/t/p/original${actor.profile_path})`;
-        castImages[i].style.backgroundSize = "70px";
-        castImages[i].style.backgroundPosition = "0.7em, -2em";
+        castImages[i].style.backgroundSize = "contain";
+        castImages[i].style.backgroundPosition = "center";
       } else {
         castImages[i].style.backgroundSize = "contain";
         castImages[i].style.backgroundPosition = "0em, 0em";
