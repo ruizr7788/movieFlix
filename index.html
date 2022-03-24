@@ -49,7 +49,9 @@
         </div>
         <div id="watchlist__container">
           <div class="watchlist">
-            <button type="button" class="watchlist--btn">Watchlist</button>
+            <button type="button" id="open__watchlist" class="watchlist--btn">
+              Watchlist
+            </button>
           </div>
         </div>
       </section>
@@ -261,8 +263,8 @@
         </div>
       </div>
     </section>
-    <section id="watchlist__container">
-      <div id="watchlist__header" cll>
+    <section id="watchlist__container--modal" class="hidden">
+      <div id="watchlist__header">
         <div class="watchlist--header-title-container">
           <h3 class="watchlist--title">Watchlist</h3>
         </div>
@@ -272,55 +274,6 @@
       </div>
       <div id="watchlist__list--container">
         <ul id="watchlist">
-          <!-- in js add data attribute with media id -->
-          <li class="watchlist--item">
-            <div class="watchlist--item-img">
-              <img src="./images/mockflowimg9.jpg" alt="" />
-            </div>
-            <div class="watchlist--item-info">
-              <h3 class="watchlist--item-title">Jackass Forever (2022)</h3>
-              <p class="watchlist--item-duration">2h 30m</p>
-            </div>
-            <div class="watchlist--item-remove">
-              <button class="watchlist--remove-btn">Remove</button>
-            </div>
-          </li>
-          <li class="watchlist--item">
-            <div class="watchlist--item-img">
-              <img src="./images/mockflowimg9.jpg" alt="" />
-            </div>
-            <div class="watchlist--item-info">
-              <h3 class="watchlist--item-title">Jackass Forever (2022)</h3>
-              <p class="watchlist--item-duration">2h 30m</p>
-            </div>
-            <div class="watchlist--item-remove">
-              <button class="watchlist--remove-btn">Remove</button>
-            </div>
-          </li>
-          <li class="watchlist--item">
-            <div class="watchlist--item-img">
-              <img src="./images/mockflowimg9.jpg" alt="" />
-            </div>
-            <div class="watchlist--item-info">
-              <h3 class="watchlist--item-title">Jackass Forever (2022)</h3>
-              <p class="watchlist--item-duration">2h 30m</p>
-            </div>
-            <div class="watchlist--item-remove">
-              <button class="watchlist--remove-btn">Remove</button>
-            </div>
-          </li>
-          <li class="watchlist--item">
-            <div class="watchlist--item-img">
-              <img src="./images/mockflowimg9.jpg" alt="" />
-            </div>
-            <div class="watchlist--item-info">
-              <h3 class="watchlist--item-title">Jackass Forever (2022)</h3>
-              <p class="watchlist--item-duration">2h 30m</p>
-            </div>
-            <div class="watchlist--item-remove">
-              <button class="watchlist--remove-btn">Remove</button>
-            </div>
-          </li>
           <li class="watchlist--item">
             <div class="watchlist--item-img">
               <img src="./images/mockflowimg9.jpg" alt="" />
@@ -335,12 +288,15 @@
           </li>
         </ul>
       </div>
+      <div id="watchlist__modal--exit">
+        <button id="watchlist__modal--exit-button">Close</button>
+      </div>
     </section>
     <section id="footer__container">
       <div id="footer">
         <h6>&copy; Copyright, Don't claim as your own.</h6>
       </div>
     </section>
-    <div class="overlay"></div>
+    <div class="overlay hidden"></div>
   </body>
 </html>

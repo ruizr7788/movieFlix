@@ -26,6 +26,7 @@ class ModalView {
 
   openModal(mediaState) {
     const thisKey = this;
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
     //   https://image.tmdb.org/t/p/original
     this.#movieTitle.textContent = mediaState.mediaData.title;
     this.#whereToWatch.textContent = mediaState.mediaData.whereToWatch;
