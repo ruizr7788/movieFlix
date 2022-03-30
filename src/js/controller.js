@@ -59,16 +59,14 @@ const controlSearchResults = async function (query, year, type) {
 };
 
 const watchlistController = function (mediaID, action, btn) {
-  console.log(mediaID, btn);
   if (action === "add") {
-    model.state.watchlist.add(mediaID);
+    model.addToWatchlist(mediaID);
     watchlistView.removeStyle(btn);
   }
   if (action === "remove") {
-    model.state.watchlist.delete(mediaID);
+    model.removeFromWatchlist(mediaID);
     watchlistView.addStyle(btn);
   }
-  console.log(model.state);
 };
 
 const controlWindow = function (currentSize, newSize) {
@@ -113,12 +111,17 @@ const controlModalView = async function (mediaID) {
   modalView.openModal(mediaState);
 };
 
+const removeFromWatchlistController = function (mediaID) {
+  model.removeFromWatchlist(mediaID);
+};
+
 const init = function () {
   controlTopMovies();
   resultsView.addHandlerRender(controlSearchResults);
   responsiveCardView.addHandlerRender(controlWindow);
   paginationView.addHandlerClick(controlPagination);
   modalView.addHandlerRender(controlModalView);
-  watchlistView.addHandlerRender(watchlistController);
+  watchlistView.addHandlerRender(watchlistController, model.state.watchlist);
+  watchlistView.removeFromWatchlist(removeFromWatchlistController);
 };
 init();

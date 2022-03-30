@@ -45,7 +45,7 @@ export const state = {
       actors: [],
     },
   },
-  watchlist: new Set(),
+  watchlist: new Map(),
 };
 
 export const setTopMovies = async function () {
@@ -209,3 +209,34 @@ function updatePagination() {
     next.disabled = false;
   }
 }
+
+// //////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////
+// ADDING TO WATCHLIST
+
+async function generateWatchlistData(mediaID) {
+  // returns necessary info for watchlist view
+  const data = await helper.getMediaData(mediaID, "movie");
+  const mediaObj = {
+    posterImage: `https://image.tmdb.org/t/p/original${data.poster_path}`,
+    title: data.title,
+    releaseDate: data.release_date.slice(0, 4),
+    duration: `${Math.floor(data.runtime / 60)}h ${data.runtime % 60}m`,
+    movieID: mediaID,
+  };
+  return mediaObj;
+}
+
+export const addToWatchlist = async function (mediaID) {
+  const currentWatchlist = Array.from(state.watchlist.keys());
+
+  if (currentWatchlist.includes(mediaID)) return;
+  const mediaObject = await generateWatchlistData(mediaID);
+
+  state.watchlist.set(mediaID, mediaObject);
+};
+
+export const removeFromWatchlist = function (mediaID) {
+  state.watchlist.delete(mediaID);
+};
